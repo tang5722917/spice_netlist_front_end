@@ -1,3 +1,9 @@
+#temp file for circuit sim
+*.temp
+*.txt
+*.data
+*.raw
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
