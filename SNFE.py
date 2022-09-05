@@ -2,7 +2,7 @@
 Author: Donald duck tang5722917@163.com
 Date: 2022-09-05 15:54:09
 LastEditors: Donald duck tang5722917@163.com
-LastEditTime: 2022-09-05 17:41:43
+LastEditTime: 2022-09-05 18:14:47
 FilePath: \spice_netlist_front_end\SNFE.py
 Description: Spice Netlist Front End
              Startup python 
@@ -17,6 +17,9 @@ import configparser
 import logging
 
 sys.path.append("./src")
+import SNFE_help
+
+
 SNFE_argv = sys.argv
 
 config = configparser.ConfigParser()
@@ -40,4 +43,6 @@ else :
             para_list.append(SNFE_argv[i-1][1])
         else:
             circuit_file_name = SNFE_argv[i-1]
-            
+    for i in range(0,len(para_list)):
+        if(para_list[i] == 'h') :
+            SNFE_help.print_help()
