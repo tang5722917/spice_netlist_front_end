@@ -2,7 +2,7 @@
 Author: Donald duck tang5722917@163.com
 Date: 2022-09-05 15:54:09
 LastEditors: Donald duck tang5722917@163.com
-LastEditTime: 2022-09-07 10:49:09
+LastEditTime: 2022-09-07 11:39:49
 FilePath: \spice_netlist_front_end\SNFE.py
 Description: Spice Netlist Front End
              Startup python 
@@ -37,16 +37,28 @@ para_list = list()
 if len(SNFE_argv) == 1:
     print("No netlist/parameter input")
 else :
-    for i in range(0,len(SNFE_argv)-1):
-        if (SNFE_argv[i-1][:2] == '--') :
-            para_list.append(SNFE_argv[i-1][2:])
-        elif SNFE_argv[i-1][0] == '-':
-            para_list.append(SNFE_argv[i-1][1])
+    for i in range(1,len(SNFE_argv)):
+        if (SNFE_argv[i][:2] == '--') :
+            para_list.append(SNFE_argv[i][2:])
+        elif SNFE_argv[i][0] == '-':
+            para_list.append(SNFE_argv[i][1])
         else:
-            circuit_file_name = SNFE_argv[i-1]
+            netlist_filename = SNFE_argv[i]
             if Debug_enable =='1':
-                logging.info('Input circuit netlist name: ' + circuit_file_name  )
-            
+                logging.info('Input circuit netlist name: ' + netlist_filename  )
+            fnetfile = netlist_check.check( netlist_filename,Debug_enable)
+
+    for i in range(0,len(para_list)):
+        if(para_list[i] == 'h') :
+            netlist_check.pre_function('para_list[i]')
+        elif(para_list[i] == 'help') :
+            netlist_check.pre_function('para_list[i]')
+        else : 
+            print("undefine options!")
+            if Debug_enable =='1':
+                logging.error('undefine options!')
+            os._exit(1)
+
     for i in range(0,len(para_list)):
         if(para_list[i] == 'h') :
             SNFE_help.print_help()
