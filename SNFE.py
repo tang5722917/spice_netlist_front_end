@@ -2,7 +2,7 @@
 Author: Donald duck tang5722917@163.com
 Date: 2022-09-05 15:54:09
 LastEditors: Donald duck tang5722917@163.com
-LastEditTime: 2022-09-08 16:42:59
+LastEditTime: 2022-09-08 17:36:39
 FilePath: \spice_netlist_front_end\SNFE.py
 Description: Spice Netlist Front End
              Startup python 
@@ -17,6 +17,7 @@ import configparser
 import logging
 
 sys.path.append("./src")
+
 import SNFE_help
 import netlist_check
 import netlist_deal_main
