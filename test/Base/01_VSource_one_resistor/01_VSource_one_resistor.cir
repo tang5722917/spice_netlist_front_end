@@ -5,9 +5,15 @@
  * @LastEditTime: 2022-09-05 16:03:11
  * @FilePath: \spice_netlist_front_end\test\01_VSource_one_resistor
  * @Description:  Base Test Circuit 01
- *                1 Volt Source and one resistor  
- * Copyright (c) 2022 by Donald duck tang5722917@163.com, All Rights Reserved. 
+ *                1 Volt Source and one resistor
+ * Copyright (c) 2022 by Donald duck tang5722917@163.com, All Rights Reserved.
  *
 
 V1 0 1 DC 10V
 R1 0 1 10k
+
+.op
+
+.control
+    set filetype = ascii
+.endc

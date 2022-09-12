@@ -1,12 +1,12 @@
 '''
 Author: Donald duck tang5722917@163.com
 Date: 2022-09-07 10:47:42
-LastEditors: Donald duck tang5722917@163.com
-LastEditTime: 2022-09-08 16:54:39
-FilePath: \spice_netlist_front_end\src\netlist_check.py
+LastEditors: Donald Duck tang5722917@163.com
+LastEditTime: 2022-09-13 03:01:49
+FilePath: /spice_netlist_front_end/src/netlist_check.py
 Description: Netlist input check function
 
-Copyright (c) 2022 by Donald duck tang5722917@163.com, All Rights Reserved. 
+Copyright (c) 2022 by Donald duck tang5722917@163.com, All Rights Reserved.
 '''
 import logging
 import os
@@ -31,7 +31,8 @@ def check( netlist_filename,Debug_enable ) :
         if f in locals():
             f.close()
     if Debug_enable =='1':
-        logging.info("Circuit Netlist\n")
+        logging.info("Circuit Netlist")
+        logging.info("********************************************")
     i = 1
     netlist_list = list()
     netlist_item = list()
@@ -53,6 +54,7 @@ def check( netlist_filename,Debug_enable ) :
         netlist_item.append(line.strip())
     netlist_list.append(netlist_item.copy())
     if Debug_enable =='1':
+        logging.info("********************************************")
         logging.info("Circuit netlist End \n")
     f.close()
     return netlist_list
