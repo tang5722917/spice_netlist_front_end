@@ -12,7 +12,7 @@
 V1 0 1 DC 10V
 R1 0 1 10k
 
-.op
+.OP
 
 .control
     set filetype = ascii

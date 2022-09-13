@@ -2,7 +2,7 @@
 Author: Donald duck tang5722917@163.com
 Date: 2022-09-05 15:54:09
 LastEditors: Donald duck tang5722917@163.com
-LastEditTime: 2022-09-13 16:52:41
+LastEditTime: 2022-09-13 17:06:21
 FilePath: \spice_netlist_front_end\SNFE.py
 Description: Spice Netlist Front End
              Startup python
@@ -22,6 +22,7 @@ import SNFE_help
 import netlist_check
 import netlist_deal_main
 import netlist_cal_main
+
 logfile_name = 'log.txt'
 SNFE_argv = sys.argv
 for arg in SNFE_argv:
@@ -59,7 +60,7 @@ else :
                 logging.info('Input circuit netlist name: ' + netlist_filename  )
             #Input netlist file and first check for the netlist file
             net_aftercheck = netlist_check.check( netlist_filename,Debug_enable)
-    # Deal SNFE input parameter
+    # Pre-deal SNFE input parameter
     for i in range(0,len(para_list)):
         if(para_list[i] == 'h') :
             netlist_check.pre_function('para_list[i]')
@@ -71,7 +72,6 @@ else :
             netlist_check.pre_function('para_list[i]')
         elif('logpath=' in para_list[i] ):
             netlist_check.pre_function('para_list[i]')
-
         else :
             print("undefine options!")
             if Debug_enable =='1':
