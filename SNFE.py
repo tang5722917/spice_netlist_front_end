@@ -1,9 +1,9 @@
 '''
 Author: Donald duck tang5722917@163.com
 Date: 2022-09-05 15:54:09
-LastEditors: Donald Duck tang5722917@163.com
-LastEditTime: 2022-09-13 01:18:02
-FilePath: /spice_netlist_front_end/SNFE.py
+LastEditors: Donald duck tang5722917@163.com
+LastEditTime: 2022-09-13 16:52:41
+FilePath: \spice_netlist_front_end\SNFE.py
 Description: Spice Netlist Front End
              Startup python
 
@@ -22,15 +22,18 @@ import SNFE_help
 import netlist_check
 import netlist_deal_main
 import netlist_cal_main
-
+logfile_name = 'log.txt'
 SNFE_argv = sys.argv
+for arg in SNFE_argv:
+    if('--logpath=' in arg ):
+        logfile_name = arg[10:]
 
 config = configparser.ConfigParser()
 config.read('SNFE.cfg')
 Debug_enable = config['Debug']['Debug_enable']
 if Debug_enable =='1':
     print("Debug enable")
-    logging.basicConfig(filename="log.txt", filemode="w", format="%(levelname)s:%(message)s", datefmt="%d-%M-%Y %H:%M:%S", level=logging.DEBUG)
+    logging.basicConfig(filename=logfile_name, filemode="w", format="%(levelname)s:%(message)s", datefmt="%d-%M-%Y %H:%M:%S", level=logging.DEBUG)
     logging.info('Time: '+time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()))
     logging.info('Input parameter: ' + str(SNFE_argv) )
 else:print("Debug unable")
@@ -66,6 +69,9 @@ else :
             netlist_check.pre_function('para_list[i]')
         elif(para_list[i] == 'version') :
             netlist_check.pre_function('para_list[i]')
+        elif('logpath=' in para_list[i] ):
+            netlist_check.pre_function('para_list[i]')
+
         else :
             print("undefine options!")
             if Debug_enable =='1':
