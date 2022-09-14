@@ -1,15 +1,17 @@
 '''
 Author: Donald duck tang5722917@163.com
 Date: 2022-09-14 10:40:41
-LastEditors: Donald duck tang5722917@163.com
-LastEditTime: 2022-09-14 14:19:02
-FilePath: \spice_netlist_front_end\src\circuit_element_func.py
-Description: 
+LastEditors: Donald Duck tang5722917@163.com
+LastEditTime: 2022-09-14 20:48:36
+FilePath: /spice_netlist_front_end/src/circuit_element_func.py
+Description:
 
-Copyright (c) 2022 by Donald duck tang5722917@163.com, All Rights Reserved. 
+Copyright (c) 2022 by Donald duck tang5722917@163.com, All Rights Reserved.
 '''
 from Circuit_element import Element_R
 from Circuit_element import Element_V
+
+from Circuit_Control import Control_op
 
 def netlist_element_deal(net_line,statue_net):
     elem = net_line.split()
@@ -26,11 +28,18 @@ def netlist_element_deal(net_line,statue_net):
             obj.import_elem(elem[1],elem[2],elem[3:])
             obj.print_R()
             return [obj,0]
-        elif elem[0].lower() == '.op':      
-            print(elem)
+        elif elem[0].lower() == '.op':
+            if len(elem) > 1:
+                obj = Control_op.Control_op( elem[2:] )
+            else:
+                obj = Control_op.Control_op()
+            obj.print_op()
+            return [obj,1]
         elif elem[0].lower() == '.control':       #Control deck
             statue_net = 1
         elif elem[0].lower() == '.endc':       #Control deck end
+            statue_net = 0
+        elif elem[0].lower() == '.end':       #Netlist end
             statue_net = 0
         else:
             return [-1,-1]

@@ -17,3 +17,4 @@ R1 0 1 10k
 .control
     set filetype = ascii
 .endc
+.end
