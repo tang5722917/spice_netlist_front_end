@@ -2,7 +2,7 @@
 Author: Donald duck tang5722917@163.com
 Date: 2022-09-05 15:54:09
 LastEditors: Donald duck tang5722917@163.com
-LastEditTime: 2022-09-13 17:06:21
+LastEditTime: 2022-09-14 16:45:02
 FilePath: \spice_netlist_front_end\SNFE.py
 Description: Spice Netlist Front End
              Startup python
@@ -12,9 +12,12 @@ Copyright (c) 2022 by Donald duck tang5722917@163.com, All Rights Reserved.
 import sys
 import os
 import time
-import re
+
+start_time = time.time()
+
 import configparser
 import logging
+
 
 sys.path.append("./src")
 
@@ -97,3 +100,6 @@ else :
     #Generate ocatve .m file
     if net_aftercheck != 0:
         octave_run_list = netlist_cal_main.netlist_cal_main(circuit_obj,para_setting,Debug_enable)
+end_time = end = time.time()
+
+print (str(end_time-start_time))
