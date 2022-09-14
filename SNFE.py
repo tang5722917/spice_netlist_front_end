@@ -2,7 +2,7 @@
 Author: Donald duck tang5722917@163.com
 Date: 2022-09-05 15:54:09
 LastEditors: Donald duck tang5722917@163.com
-LastEditTime: 2022-09-14 16:45:02
+LastEditTime: 2022-09-14 17:56:19
 FilePath: \spice_netlist_front_end\SNFE.py
 Description: Spice Netlist Front End
              Startup python
@@ -12,13 +12,14 @@ Copyright (c) 2022 by Donald duck tang5722917@163.com, All Rights Reserved.
 import sys
 import os
 import time
-
+import platform
+import argparse
 start_time = time.time()
 
 import configparser
 import logging
 
-
+optparser = argparse.ArgumentParser()
 sys.path.append("./src")
 
 import SNFE_help
@@ -39,6 +40,11 @@ if Debug_enable =='1':
     print("Debug enable")
     logging.basicConfig(filename=logfile_name, filemode="w", format="%(levelname)s:%(message)s", datefmt="%d-%M-%Y %H:%M:%S", level=logging.DEBUG)
     logging.info('Time: '+time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()))
+    
+    sysinfo = platform.system()
+    logging.info(platform.architecture())
+    print(platform.architecture())
+    
     logging.info('Input parameter: ' + str(SNFE_argv) )
 else:print("Debug unable")
 
