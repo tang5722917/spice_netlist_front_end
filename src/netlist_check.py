@@ -2,7 +2,7 @@
 Author: Donald duck tang5722917@163.com
 Date: 2022-09-07 10:47:42
 LastEditors: Donald Duck tang5722917@163.com
-LastEditTime: 2022-09-15 23:02:17
+LastEditTime: 2022-09-15 23:43:22
 FilePath: /spice_netlist_front_end/src/netlist_check.py
 Description: Netlist input check function
 
@@ -40,14 +40,10 @@ def check( netlist_filename,Debug_enable ) :
         if i == 1:
             i = i+1
             logging.info("Circuit title : " + line)
-            continue
         i = i+1
-        if (len(line.strip()) == 0):
-            continue
-        if line.strip()[0] == '*':
-            continue
-        if Debug_enable =='1':
-            logging.info(line.strip())
+        if ((Debug_enable =='1') & (len(line.strip()) != 0)) :
+            if ((line.strip())[0] !='*'):
+                logging.info(line.strip())
         checkresult = checkrule(line,Debug_enable,i)
         if checkresult[0] == False:
             print(checkresult[1])

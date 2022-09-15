@@ -2,7 +2,7 @@
 Author: Donald duck tang5722917@163.com
 Date: 2022-09-14 10:40:41
 LastEditors: Donald Duck tang5722917@163.com
-LastEditTime: 2022-09-15 21:21:26
+LastEditTime: 2022-09-15 23:24:43
 FilePath: /spice_netlist_front_end/src/circuit_element_func.py
 Description:
 
@@ -36,6 +36,8 @@ def netlist_element_deal(net_line):
         elif elem[0].lower() == '.end':       #Netlist end
             obj = Control.Control_end()
             return [obj,1]
+        else:
+            return [-3,-3]
     elif Control.Control.Control_statue == 1:
         if elem[0].lower() == '.endc':       #Control deck end
             obj = Control.Control_endc()
