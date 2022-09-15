@@ -1,0 +1,26 @@
+* Circuit_C1
+*
+ * @Author: Donald duck tang5722917@163.com
+ * @Date: 2022-09-15 17:32:46
+ * @LastEditors: Donald duck tang5722917@163.com
+ * @LastEditTime: 2022-09-15 17:36:37
+ * @FilePath: \spice_netlist_front_end\test\Base\02_Circuit_C1\02_Circuit_C1.cir
+ * @Description: Circuit Book Appendix C1 
+ * Circuit element R/V/I/E
+ * Copyright (c) 2022 by Donald duck tang5722917@163.com, All Rights Reserved. 
+ */
+
+
+Vus 1 4 DC 40V
+Is 1 2 DC 1A 
+R3 1 2 10
+R2 1 0 20
+R4 2 3 10
+R1 4 0 10
+E2u1 3 0 4 0 2 
+.op
+
+.control
+    set filetype = ascii
+.endc
+.end

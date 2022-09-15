@@ -1,0 +1,25 @@
+* ERL-520 Fig 2.2 -- Circuit element R/V/C
+*
+ * @Author: Donald duck tang5722917@163.com
+ * @Date: 2022-09-15 18:32:48
+ * @LastEditors: Donald duck tang5722917@163.com
+ * @LastEditTime: 2022-09-15 18:33:10
+ * @FilePath: \spice_netlist_front_end\test\Base\03_S22\03_S22.cir
+ * @Description: ERL-520 Fig 2.2
+ *               Circuit element R/V/C
+ * Copyright (c) 2022 by Donald duck tang5722917@163.com, All Rights Reserved. 
+ */
+
+I 1 0 DC 1A
+R1 1 0 10
+R2 1 2 20
+R3 2 0 30
+C1 1 2 10U
+C2 2 0 1U 
+
+.OP
+
+.control
+    set filetype = ascii
+.endc
+.end
