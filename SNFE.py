@@ -2,7 +2,7 @@
 Author: Donald duck tang5722917@163.com
 Date: 2022-09-05 15:54:09
 LastEditors: Donald duck tang5722917@163.com
-LastEditTime: 2022-09-15 16:40:19
+LastEditTime: 2022-09-15 18:40:30
 FilePath: \spice_netlist_front_end\SNFE.py
 Description: Spice Netlist Front End
              Startup python
@@ -50,6 +50,7 @@ logging.info("******************************************************************
 logging.info("CPU info : "+ platform.processor())
 logging.info("OS info : "+ platform.system() + platform.release() )
 logging.info("Python info : "+ platform.python_version() )
+
 logging.info("********************************************************************************")
 logging.info('\nInput parameter: ' + str(sys.argv) )
 
