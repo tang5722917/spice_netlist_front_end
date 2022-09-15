@@ -2,7 +2,7 @@
 Author: Donald duck tang5722917@163.com
 Date: 2022-09-05 15:54:09
 LastEditors: Donald Duck tang5722917@163.com
-LastEditTime: 2022-09-16 02:15:36
+LastEditTime: 2022-09-16 03:03:51
 FilePath: /spice_netlist_front_end/SNFE.py
 Description: Spice Netlist Front End
              Startup python
@@ -79,7 +79,7 @@ if args.Netlist_file != 'none':
 
     #Generate ocatve .m file
     if net_aftercheck != 0:
-        octave_run_list = netlist_cal_main.netlist_cal_main(circuit_obj,para_setting,Debug_enable,logging)
+        octave_run_list = netlist_cal_main.netlist_cal_main(circuit_obj,option_para,Debug_enable,logging)
 else:
     logging.info('\nError!\nPlease input correct netlist file name'  )
     print('\nError!\nPlease input correct netlist file name')

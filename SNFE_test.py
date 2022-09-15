@@ -2,7 +2,7 @@
 Author: Donald Duck tang5722917@163.com
 Date: 2022-09-12 23:35:08
 LastEditors: Donald Duck tang5722917@163.com
-LastEditTime: 2022-09-16 02:42:09
+LastEditTime: 2022-09-16 03:04:46
 FilePath: /spice_netlist_front_end/SNFE_test.py
 Description: SNFE auto test script
 Copyright (c) 2022 by Donald Duck email: tang5722917@163.com, All Rights Reserved.
@@ -75,7 +75,7 @@ for i in range(0,int(Number_test_sets)):
     PATH_test_set = config['Test_set_'+str(i)]['PATH_test_set_'+str(i)]
     Name_test_set = config['Test_set_'+str(i)]['Name_test_set_'+str(i)]
     Info_test_set = config['Test_set_'+str(i)]['Info_test_set_'+str(i)]
-    testset = Test_set.Test_set(PATH_test_set,Name_test_set,Info_test_set,option_para.get_SNFE_output_action())
+    testset = Test_set.Test_set(PATH_test_set,Name_test_set,Info_test_set,option_para)
     sets_list.append(testset)
 
 
