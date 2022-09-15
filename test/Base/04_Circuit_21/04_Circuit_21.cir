@@ -1,0 +1,22 @@
+*Circuit -V Fig 2-1 a) P33 --  1 Volt source 5 resistor
+*
+ * @Author: Donald Duck tang5722917@163.com
+ * @Date: 2022-09-15 22:55:14
+ * @LastEditors: Donald Duck tang5722917@163.com
+ * @LastEditTime: 2022-09-15 22:57:18
+ * @FilePath: /spice_netlist_front_end/test/Base/04_Circuit_21/04_Circuit_21.cir
+ * @Description:Circuit -V Fig 2-1 a) P33 --  1 Volt source 5 resistor
+ * Copyright (c) 2022 by Donald Duck email: tang5722917@163.com, All Rights Reserved.
+ */
+V1 1 0 DC 10V
+R1 1 2 10
+R2 2 3 1K
+R3 2 3 10K
+R4 3 0 10k
+R5 2 0 5k
+
+
+.control
+    set filetype = ascii
+.endc
+.end

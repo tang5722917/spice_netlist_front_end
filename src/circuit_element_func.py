@@ -1,9 +1,9 @@
 '''
 Author: Donald duck tang5722917@163.com
 Date: 2022-09-14 10:40:41
-LastEditors: Donald duck tang5722917@163.com
-LastEditTime: 2022-09-15 16:38:29
-FilePath: \spice_netlist_front_end\src\circuit_element_func.py
+LastEditors: Donald Duck tang5722917@163.com
+LastEditTime: 2022-09-15 21:21:26
+FilePath: /spice_netlist_front_end/src/circuit_element_func.py
 Description:
 
 Copyright (c) 2022 by Donald duck tang5722917@163.com, All Rights Reserved.
@@ -27,7 +27,7 @@ def netlist_element_deal(net_line):
             obj = Element_R.Element_R(elem[0])
             obj.import_elem(elem[1],elem[2],elem[3:])
             return [obj,0]
-        elif elem[0].lower() == '.op':
+        elif elem[0].lower() == '.op':            # OP sim
             obj = Control_op.Control_op(elem)
             return [obj,1]
         elif elem[0].lower() == '.control':       #Control deck
