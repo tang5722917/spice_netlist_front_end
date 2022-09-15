@@ -2,7 +2,7 @@
 Author: Donald duck tang5722917@163.com
 Date: 2022-09-05 15:54:09
 LastEditors: Donald Duck tang5722917@163.com
-LastEditTime: 2022-09-16 03:03:51
+LastEditTime: 2022-09-16 03:25:21
 FilePath: /spice_netlist_front_end/SNFE.py
 Description: Spice Netlist Front End
              Startup python
@@ -67,19 +67,19 @@ net_aftercheck = 0
 logging.info('\nInput circuit netlist name: ' + args.Netlist_file  )
 if args.Netlist_file != 'none':
 #Input netlist file and first check for the netlist file
-    net_aftercheck = netlist_check.check( args.Netlist_file,Debug_enable)
+    net_aftercheck = netlist_check.check( args.Netlist_file,Debug_enable,logging,option_para)
     # Pre-deal SNFE input parameter
 
     # Deal netlist file after first check, output this circuit object(Node, Element, Model,  Control)
     if net_aftercheck != 0:
-        circuit_obj = netlist_deal_main.netlist_deal_main(net_aftercheck,Debug_enable,logging)
+        circuit_obj = netlist_deal_main.netlist_deal_main(net_aftercheck,Debug_enable,logging,option_para)
 
     #Generate run para setting for SNFE input
     para_setting = list()
 
     #Generate ocatve .m file
     if net_aftercheck != 0:
-        octave_run_list = netlist_cal_main.netlist_cal_main(circuit_obj,option_para,Debug_enable,logging)
+        octave_run_list = netlist_cal_main.netlist_cal_main(circuit_obj,option_para,Debug_enable,logging,option_para)
 else:
     logging.info('\nError!\nPlease input correct netlist file name'  )
     print('\nError!\nPlease input correct netlist file name')

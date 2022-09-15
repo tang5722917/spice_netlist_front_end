@@ -2,10 +2,10 @@
 Author: Donald duck tang5722917@163.com
 Date: 2022-09-14 09:47:16
 LastEditors: Donald Duck tang5722917@163.com
-LastEditTime: 2022-09-16 01:09:34
-FilePath: /spice_netlist_front_end/src/Circuit.py
-Description:
-
+LastEditTime: 2022-09-16 03:20:30
+FilePath: /spice_netlist_front_end/src/Circuit_operator/Circuit.py
+Description: Circuit base class
+            Building the Circuit obj
 Copyright (c) 2022 by Donald duck tang5722917@163.com, All Rights Reserved.
 '''
 import os
@@ -17,7 +17,7 @@ from Circuit_Control import Control
 class Circuit :
     Circuit_num = 0
 
-    def __init__(self,circuit_name,Debug_enable,logging):
+    def __init__(self,circuit_name,Debug_enable,logging,option_para):
         self.Circuit_num=Circuit.Circuit_num
         self.circuit_name = circuit_name
         self.Debug_enable = Debug_enable
@@ -26,6 +26,7 @@ class Circuit :
         self.node_obj_list = list()
         self.model_obj_list = list()
         self.control_obj_list = list()
+        self.option_para=option_para
         obj = Circuit_node.Circuit_node('0')
         self.node_obj_list.append(obj)
         self.logging = logging

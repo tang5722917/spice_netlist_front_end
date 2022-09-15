@@ -2,13 +2,12 @@
 Author: Donald duck tang5722917@163.com
 Date: 2022-09-07 10:47:42
 LastEditors: Donald Duck tang5722917@163.com
-LastEditTime: 2022-09-15 23:43:22
+LastEditTime: 2022-09-16 03:25:40
 FilePath: /spice_netlist_front_end/src/netlist_check.py
 Description: Netlist input check function
 
 Copyright (c) 2022 by Donald duck tang5722917@163.com, All Rights Reserved.
 '''
-import logging
 import os
 import re
 
@@ -18,7 +17,7 @@ def checkrule(line,Debug_enable,line_num):
     return checkresult
 
 
-def check( netlist_filename,Debug_enable ) :
+def check( netlist_filename,Debug_enable,logging,option_para) :
     try:
         f = open(netlist_filename,'r')
         print("Open netlist "+netlist_filename+" successfully")
