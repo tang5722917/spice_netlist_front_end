@@ -1,9 +1,9 @@
 '''
 Author: Donald Duck tang5722917@163.com
 Date: 2022-09-13 01:05:58
-LastEditors: Donald Duck tang5722917@163.com
-LastEditTime: 2022-09-13 02:53:52
-FilePath: /spice_netlist_front_end/test/Test_set.py
+LastEditors: Donald duck tang5722917@163.com
+LastEditTime: 2022-09-15 19:47:02
+FilePath: \spice_netlist_front_end\test\Test_set.py
 Description:Test set class
 Copyright (c) 2022 by Donald Duck email: tang5722917@163.com, All Rights Reserved.
 '''
@@ -16,14 +16,15 @@ from Test_Circuit import Test_Circuit
 
 
 class Test_set:
-    circuit_list = list()
 
     def __init__(self,set_path,set_name,set_info):
         self.set_path=set_path
         self.set_name=set_name
         self.set_info=set_info
+        self.Number_test_circuit = 0
         logging.info('Circuit test set '+set_name +' PATH: '+set_path)
         logging.info(self.set_info + '\n')
+        self.circuit_list = list()
 
 
     def cfg_is_exit(self):
@@ -45,11 +46,11 @@ class Test_set:
         test_setting = 0
         config = configparser.ConfigParser()
         config.read(cfg_name)
-        Number_test_circuit = int(config['Test_circuit']['Number_test_circuit'])
-        logging.info('Circuit test set '+ self.set_name +' includes '+str(Number_test_circuit) + ' test circuits.')
+        self.Number_test_circuit = int(config['Test_circuit']['Number_test_circuit'])
+        logging.info('Circuit test set '+ self.set_name +' includes '+str(self.Number_test_circuit) + ' test circuits.')
         logging.info('Test circuit setting : ')
         logging.info('                      0 : default, only import netlist and export the octave .m file \n')
-        for i in range(0,Number_test_circuit):
+        for i in range(0,self.Number_test_circuit):
             Name_test_cir = config['Test_cir_'+str(i)]['Name_test_circuit_'+str(i)]
             Info_test_cir = config['Test_cir_'+str(i)]['Info_test_circuit_'+str(i)]
             testcir = Test_Circuit(Name_test_cir,Info_test_cir,test_setting,self.set_path)
@@ -59,3 +60,15 @@ class Test_set:
         if len(self.circuit_list) != 0:
             for cir in self.circuit_list:
                 cir.run_test()
+    def run_circuit(self,num):
+        self.circuit_list[num].run_test()
+                
+    def print_test_set_info(self):
+        return self.set_info
+
+    def print_test_circuit_info(self,num):
+        if (num >= self.Number_test_circuit) or (num < 0) :
+            print("Error test circuit number")
+            os._exit(1)
+        else:
+            return self.circuit_list[num].print_info()
