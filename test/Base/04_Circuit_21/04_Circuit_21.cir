@@ -16,7 +16,7 @@ R4 3 0 10k
 R5 2 0 5k
 
 .op
-control
+.control
     set filetype = ascii
 .endc
 .end

@@ -2,7 +2,7 @@
 Author: Donald duck tang5722917@163.com
 Date: 2022-09-14 09:47:16
 LastEditors: Donald Duck tang5722917@163.com
-LastEditTime: 2022-09-15 23:46:39
+LastEditTime: 2022-09-16 01:09:34
 FilePath: /spice_netlist_front_end/src/Circuit.py
 Description:
 
@@ -10,6 +10,7 @@ Copyright (c) 2022 by Donald duck tang5722917@163.com, All Rights Reserved.
 '''
 import os
 import circuit_element_func as cef
+
 from Circuit_element import Circuit_node
 from Circuit_Control import Control
 
@@ -55,11 +56,11 @@ class Circuit :
                 self.logging.info("Import netlist error: \nCircuit:"+str(self.Circuit_num)+"\nError Line number :" + str(net_line_num) )
                 print("Import netlist error: \nCircuit:"+str(self.Circuit_num)+"\nError Line number :" + str(net_line_num) )
                 if obj[1] == -3:
-                    if self.Debug_enable == '1':
-                        self.logging.info("Error reason : " + "Illegal netlist line !")
+                    print("Error reason : " + "Illegal netlist line !")
+                    self.logging.info("Error reason : " + "Illegal netlist line !")
                 else:
-                    if self.Debug_enable == '1':
-                        self.logging.info("Error reason : Maybe miss \".end\" ")
+                    self.logging.info("Error reason : Maybe miss \".end\" ")
+                    print("Error reason : Maybe miss \".end\" ")
                 os._exit(1)
         if (Control.Control.Control_statue == -1):
             self.logging.info("Successfully import netlist :"+str(self.Circuit_num) )
@@ -76,9 +77,27 @@ class Circuit :
             logging.info(str(elem))
         for elem in self.model_obj_list:
             logging.info(str(elem))
+    def _is_node_name_in_node_list(self,node_name):
+        for node_obj in self.node_obj_list:
+            if node_obj.eq_name(node_name):
+                return node_obj
+            else :
+                continue
+        return False
 
-    def init_circuit_node(self,logging):
+    def _add_node_list(self,node_obj,elem_obj):
+        node_obj.node_append(elem_obj)
+        self.node_obj_list.append(node_obj)
+
+    def init_circuit_node(self):
         for elem in self.elem_obj_list:
             for node_name in elem.node_name_list:
-                print(str(node_name))
+                node = self._is_node_name_in_node_list(node_name)
+                if node == False:
+                    self._add_node_list(Circuit_node.Circuit_node(node_name),elem)
+                else:
+                    node.node_append(elem)
+        if self.Debug_enable == '1':
+            for node in self.node_obj_list:
+                self.logging.info( str(node) + "  Node Name :" +node.print_node_name())
         return len(self.node_obj_list)

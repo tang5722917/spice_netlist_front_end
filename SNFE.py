@@ -1,9 +1,9 @@
 '''
 Author: Donald duck tang5722917@163.com
 Date: 2022-09-05 15:54:09
-LastEditors: Donald duck tang5722917@163.com
-LastEditTime: 2022-09-15 18:40:30
-FilePath: \spice_netlist_front_end\SNFE.py
+LastEditors: Donald Duck tang5722917@163.com
+LastEditTime: 2022-09-16 02:15:36
+FilePath: /spice_netlist_front_end/SNFE.py
 Description: Spice Netlist Front End
              Startup python
 
@@ -20,10 +20,11 @@ import SNFE_help
 import netlist_check
 import netlist_deal_main
 import netlist_cal_main
-
+import SNFE_option_para
 import configparser
 import logging
 
+option_para = SNFE_option_para.SNFE_option_para()
 optparser = argparse.ArgumentParser(description='S(pice) N(etlist) F(ront) E(end) help info')
 optparser.add_argument("-v", "--version", help="show the version info for SNFE",
                     action="store_true")
@@ -31,6 +32,9 @@ optparser.add_argument("--logpath", help="--logpath=<file path/name> :Modify the
                         default='log.txt')
 optparser.add_argument("Netlist_file",nargs='?', type=str,help="Circuit file name (.cir/.sp/.ckt)",
                       default='none' )
+optparser.add_argument("-o","--octsolver" ,help="Import netlist and do simulation using SPICE_OctSolver" ,
+                        action="store_true")
+
 try:
     args = optparser.parse_args()
 except argparse.ArgumentError:
@@ -38,6 +42,8 @@ except argparse.ArgumentError:
 if args.version :
     SNFE_help.show_version()
     os._exit(1)
+elif args.octsolver:
+    option_para.set_SNFE_output_action(1)  # -o / -octsolver
 print('Log path :' + args.logpath)
 
 config = configparser.ConfigParser()
@@ -70,9 +76,13 @@ if args.Netlist_file != 'none':
 
     #Generate run para setting for SNFE input
     para_setting = list()
+
     #Generate ocatve .m file
     if net_aftercheck != 0:
         octave_run_list = netlist_cal_main.netlist_cal_main(circuit_obj,para_setting,Debug_enable,logging)
+else:
+    logging.info('\nError!\nPlease input correct netlist file name'  )
+    print('\nError!\nPlease input correct netlist file name')
 end_time = end = time.time()
-print ("SNFE run time : "+ str(end_time-start_time) + 's')
-logging.info("SNFE run time : "+ str(end_time-start_time) + 's')
+print ("SNFE run time : "+ "{:.5f}".format(end_time-start_time) + 's')
+logging.info("SNFE run time : "+ "{:.5f}".format(end_time-start_time) + 's')

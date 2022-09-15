@@ -2,7 +2,7 @@
 Author: Donald Duck tang5722917@163.com
 Date: 2022-09-13 01:05:58
 LastEditors: Donald Duck tang5722917@163.com
-LastEditTime: 2022-09-15 23:13:17
+LastEditTime: 2022-09-16 02:40:08
 FilePath: /spice_netlist_front_end/test/Test_set.py
 Description:Test set class
 Copyright (c) 2022 by Donald Duck email: tang5722917@163.com, All Rights Reserved.
@@ -17,10 +17,11 @@ from Test_Circuit import Test_Circuit
 
 class Test_set:
 
-    def __init__(self,set_path,set_name,set_info):
+    def __init__(self,set_path,set_name,set_info,test_config):
         self.set_path=set_path
         self.set_name=set_name
         self.set_info=set_info
+        self.test_config = test_config
         self.Number_test_circuit = 0
         logging.info('Circuit test set '+set_name +' PATH: '+set_path)
         logging.info(self.set_info + '\n')
@@ -42,18 +43,14 @@ class Test_set:
         return cfg_filename
 
     def cfg_import(self,cfg_name):
-        # 0 : default, only import netlist and export the octave .m file
-        test_setting = 0
         config = configparser.ConfigParser()
         config.read(cfg_name)
         self.Number_test_circuit = int(config['Test_circuit']['Number_test_circuit'])
         logging.info('Circuit test set '+ self.set_name +' includes '+str(self.Number_test_circuit) + ' test circuits.')
-        logging.info('Test circuit setting : ')
-        logging.info('                      0 : default, only import netlist and export the octave .m file \n')
         for i in range(0,self.Number_test_circuit):
             Name_test_cir = config['Test_cir_'+str(i)]['Name_test_circuit_'+str(i)]
             Info_test_cir = config['Test_cir_'+str(i)]['Info_test_circuit_'+str(i)]
-            testcir = Test_Circuit(Name_test_cir,Info_test_cir,test_setting,self.set_path)
+            testcir = Test_Circuit(Name_test_cir,Info_test_cir,self.test_config,self.set_path)
             self.circuit_list.append(testcir)
 
     def run_all_circuit(self) :
