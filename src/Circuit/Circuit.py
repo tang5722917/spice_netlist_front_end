@@ -2,7 +2,7 @@
 Author: Donald duck tang5722917@163.com
 Date: 2022-09-14 09:47:16
 LastEditors: Donald duck tang5722917@163.com
-LastEditTime: 2022-09-16 17:42:38
+LastEditTime: 2022-09-16 17:54:54
 FilePath: \spice_netlist_front_end\src\Circuit\Circuit.py
 Description: Circuit base class
             Building the Circuit obj
@@ -28,6 +28,7 @@ class Circuit :
         self.node_obj_list = list()
         self.model_obj_list = list()
         self.control_obj_list = list()
+        self.operator = list()
         self.option_para=option_para
         obj = Circuit_node.Circuit_node('0')
         self.node_obj_list.append(obj)
@@ -107,9 +108,3 @@ class Circuit :
             for node in self.node_obj_list:
                 self.logging.info( str(node) + "  Node Name :" +node.print_node_name())
         return len(self.node_obj_list)
-    
-    def init_circuit_model(self):
-        for elem in self.elem_obj_list:
-            if ((type(elem).__name__) == 'Element_R') or ((type(elem).__name__) == 'Element_C') or ((type(elem).__name__) == 'Element_L'):
-                obj = Model.Model('Value')
-                obj.postfix_unit_handling(elem.return_model_name())

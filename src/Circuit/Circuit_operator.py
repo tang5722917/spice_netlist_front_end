@@ -1,9 +1,9 @@
 '''
 Author: Donald Duck tang5722917@163.com
 Date: 2022-09-16 03:27:17
-LastEditors: Donald Duck tang5722917@163.com
-LastEditTime: 2022-09-16 03:36:41
-FilePath: /spice_netlist_front_end/src/Circuit/Circuit_operator.py
+LastEditors: Donald duck tang5722917@163.com
+LastEditTime: 2022-09-16 17:51:48
+FilePath: \spice_netlist_front_end\src\Circuit\Circuit_operator.py
 Description:Circuit operator base class
 Copyright (c) 2022 by Donald Duck email: tang5722917@163.com, All Rights Reserved.
 '''
@@ -20,3 +20,4 @@ class Circuit_operator(Circuit.Circuit):
         self.option_para=cir.option_para
         self.logging = cir.logging
         self.Debug_enable = cir.Debug_enable
+        self.operator = cir.operator
