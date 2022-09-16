@@ -1,18 +1,20 @@
 '''
 Author: Donald duck tang5722917@163.com
 Date: 2022-09-14 09:47:16
-LastEditors: Donald Duck tang5722917@163.com
-LastEditTime: 2022-09-16 03:20:30
-FilePath: /spice_netlist_front_end/src/Circuit_operator/Circuit.py
+LastEditors: Donald duck tang5722917@163.com
+LastEditTime: 2022-09-16 17:42:38
+FilePath: \spice_netlist_front_end\src\Circuit\Circuit.py
 Description: Circuit base class
             Building the Circuit obj
 Copyright (c) 2022 by Donald duck tang5722917@163.com, All Rights Reserved.
 '''
 import os
+import copy
 import circuit_element_func as cef
 
 from Circuit_element import Circuit_node
-from Circuit_Control import Control
+from Circuit_control import Control
+from Circuit_model import Model
 
 class Circuit :
     Circuit_num = 0
@@ -95,10 +97,19 @@ class Circuit :
             for node_name in elem.node_name_list:
                 node = self._is_node_name_in_node_list(node_name)
                 if node == False:
-                    self._add_node_list(Circuit_node.Circuit_node(node_name),elem)
+                    new_node = Circuit_node.Circuit_node(node_name)
+                    self._add_node_list(new_node,elem)
+                    elem.node_append(new_node)
                 else:
                     node.node_append(elem)
+                    elem.node_append(node)
         if self.Debug_enable == '1':
             for node in self.node_obj_list:
                 self.logging.info( str(node) + "  Node Name :" +node.print_node_name())
         return len(self.node_obj_list)
+    
+    def init_circuit_model(self):
+        for elem in self.elem_obj_list:
+            if ((type(elem).__name__) == 'Element_R') or ((type(elem).__name__) == 'Element_C') or ((type(elem).__name__) == 'Element_L'):
+                obj = Model.Model('Value')
+                obj.postfix_unit_handling(elem.return_model_name())
