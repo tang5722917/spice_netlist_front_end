@@ -1,12 +1,12 @@
 '''
 Author: Donald duck tang5722917@163.com
 Date: 2022-09-16 17:58:39
-LastEditors: Donald duck tang5722917@163.com
-LastEditTime: 2022-09-16 18:01:32
-FilePath: \spice_netlist_front_end\src\Circuit_model\Element_model\Model_R.py
+LastEditors: Donald Duck tang5722917@163.com
+LastEditTime: 2022-09-18 00:55:33
+FilePath: /spice_netlist_front_end/src/Circuit_model/Element_model/Model_R.py
 Description:  Resistor class
 
-Copyright (c) 2022 by Donald duck tang5722917@163.com, All Rights Reserved. 
+Copyright (c) 2022 by Donald duck tang5722917@163.com, All Rights Reserved.
 '''
 from Circuit_model import Model
 

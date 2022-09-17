@@ -2,21 +2,29 @@
 Author: Donald Duck tang5722917@163.com
 Date: 2022-09-17 10:52:35
 LastEditors: Donald Duck tang5722917@163.com
-LastEditTime: 2022-09-17 14:49:15
+LastEditTime: 2022-09-18 00:45:43
 FilePath: /spice_netlist_front_end/src/Circuit_model/Circuit_value.py
 Description:
 Copyright (c) 2022 by Donald Duck email: tang5722917@163.com, All Rights Reserved.
 '''
 import os
+import sys
 from decimal import Decimal
 
 class Circuit_value:
-    def __init__(self,str):
+    def __init__(self,str,logging):
+        self.logging = logging
         if type(str).__name__ == 'str':
-            self.postfix_unit_handling(str)
-
+            value = self.postfix_unit_handling(str)
+            if value != False:
+                self.value = value
+            else:
+                print("Error netlist input! ")
+                self.logging.info("Error netlist input! \n Maybe there is error value number in netlist")
+                os._exit(1)
         else:
             print("Error netlist input! ")
+            self.logging.info("Error netlist input! \n Maybe there is error value string in netlist")
             os._exit(1)
 #Unit
 # Current -- A
@@ -38,7 +46,15 @@ class Circuit_value:
         value_property.append(temp[0])
         temp = self.postfix_scale_handling(temp[1])
         value_property.append(temp[0])
-        value_property.append = Decimal(temp[1])
+        try :
+            float_num = eval(temp[1])
+        except OSError as err:
+            print("OS error: {0}".format(err))
+            return False
+        if (type(float_num).__name__ != 'float') & (type(float_num).__name__ != 'int'):
+            print("Illrgal number in netlist !")
+            return False
+        value_property.append(float_num*value_property[1])
         print(value_property[0],value_property[1],value_property[2])
 
 ##########################################################################
@@ -50,15 +66,26 @@ class Circuit_value:
             value_str = value_str.lower()
             s = value_str[-1*(i+1)]
             if(s == 'k') :
-                value_scale = 1000
+                value_scale = 1000.0
             elif ('meg' in value_str ):
-                value_scale = 1000000
+                value_scale = 1000000.0
                 return [value_scale,value_str[:-1*(i+3)] ]
+            elif(s == 'g') :
+                value_scale = 1000000000.0
+            elif(s == 't') :
+                value_scale = 1000000000000.0
+            elif(s == 'm') :
+                value_scale = 0.001
+            elif(s == 'u') :
+                value_scale = 0.000001
+            elif(s == 'n') :
+                value_scale = 0.000000001
+            elif(s == 'p') :
+                value_scale = 0.000000000001
             else:
                 return [value_scale,value_str]
             return [value_scale,value_str[:-1*(i+1)] ]
 
-        print(value_scale)
 
     def unit_handling(self, value_str):
         i = 0

@@ -2,7 +2,7 @@
 Author: Donald duck tang5722917@163.com
 Date: 2022-09-16 17:52:57
 LastEditors: Donald Duck tang5722917@163.com
-LastEditTime: 2022-09-17 11:09:21
+LastEditTime: 2022-09-18 00:43:24
 FilePath: /spice_netlist_front_end/src/Circuit/Circuit_element_model.py
 Description: Element Model operate class
 
@@ -19,4 +19,4 @@ class Circuit_element_model(Circuit_operator.Circuit_operator):
         for elem in self.elem_obj_list:
             if ((type(elem).__name__) == 'Element_R') or ((type(elem).__name__) == 'Element_C') or ((type(elem).__name__) == 'Element_L'):
                 obj = Model.Model('Value')
-                Circuit_value.Circuit_value(elem.return_model_name()[0])
+                Circuit_value.Circuit_value(elem.return_model_name()[0],self.logging)
