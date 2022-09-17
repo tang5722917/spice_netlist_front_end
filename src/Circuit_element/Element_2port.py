@@ -1,9 +1,9 @@
 '''
 Author: Donald duck tang5722917@163.com
 Date: 2022-09-14 11:47:08
-LastEditors: Donald duck tang5722917@163.com
-LastEditTime: 2022-09-16 17:16:32
-FilePath: \spice_netlist_front_end\src\Circuit_element\Element_2port.py
+LastEditors: Donald Duck tang5722917@163.com
+LastEditTime: 2022-09-17 11:49:15
+FilePath: /spice_netlist_front_end/src/Circuit_element/Element_2port.py
 Description: Two port element base class
 
 Copyright (c) 2022 by Donald duck tang5722917@163.com, All Rights Reserved.
@@ -21,5 +21,6 @@ class Element_2port(Element.Element):
 
     def return_neg_node(self):
         return self.node_obj_list[1]
+
     def return_model_name(self):
         return self.model_name

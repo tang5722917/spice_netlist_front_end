@@ -9,10 +9,10 @@
  * Copyright (c) 2022 by Donald Duck email: tang5722917@163.com, All Rights Reserved.
  */
 V1 1 0 DC 10V
-R1 1 2 10
-R2 2 3 1K
-R3 2 3 10K
-R4 3 0 10k
+R1 1 2 1e1k
+R2 2 3 1.125K
+R3 2 3 10.003K
+R4 3 0 1meg
 R5 2 0 5k
 
 .op

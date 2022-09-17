@@ -1,15 +1,16 @@
 '''
 Author: Donald duck tang5722917@163.com
 Date: 2022-09-07 10:48:28
-LastEditors: Donald duck tang5722917@163.com
-LastEditTime: 2022-09-16 17:56:34
-FilePath: \spice_netlist_front_end\src\netlist_deal_main.py
+LastEditors: Donald Duck tang5722917@163.com
+LastEditTime: 2022-09-17 13:49:56
+FilePath: /spice_netlist_front_end/src/netlist_deal_main.py
 Description: Deal the netlsit
              Covert the netlist to circuit object
 Copyright (c) 2022 by Donald duck tang5722917@163.com, All Rights Reserved.
 '''
 from Circuit import Circuit
 from Circuit import Circuit_print_info
+from Circuit import Circuit_source_model
 from Circuit import Circuit_element_model
 def netlist_deal_main(net_aftercheck,Debug_enable,logging,option_para) :
     circuit_obj_list = list()
@@ -35,9 +36,12 @@ def netlist_deal_main(net_aftercheck,Debug_enable,logging,option_para) :
         else :
             logging.info("Error !\nInfo : Maybe there is no connection in netlist")
         #初始化Model
+        cir = Circuit_source_model.Circuit_source_model(cir)
+        cir.init_circuit_model()
         cir = Circuit_element_model.Circuit_element_model(cir)
         cir.init_circuit_model()
 
+        # Print circuit information
         cir = Circuit_print_info.Circuit_print_info(cir)
         cir.log_all_info()
         circuit_obj_list.append(cir)
