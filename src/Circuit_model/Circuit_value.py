@@ -1,9 +1,9 @@
 '''
 Author: Donald Duck tang5722917@163.com
 Date: 2022-09-17 10:52:35
-LastEditors: Donald Duck tang5722917@163.com
-LastEditTime: 2022-09-18 00:45:43
-FilePath: /spice_netlist_front_end/src/Circuit_model/Circuit_value.py
+LastEditors: Donald duck tang5722917@163.com
+LastEditTime: 2022-09-27 19:16:55
+FilePath: \spice_netlist_front_end\src\Circuit_model\Circuit_value.py
 Description:
 Copyright (c) 2022 by Donald Duck email: tang5722917@163.com, All Rights Reserved.
 '''
@@ -96,6 +96,8 @@ class Circuit_value:
             value_type = 'type_R'
         elif (s == 'v'):
             value_type = 'type_V'
+        elif (s == 'a'):
+            value_type = 'type_I'
         elif('ohm' in value_str ):
             value_type = 'type_R'
             return [value_type,value_str[:-1*(i+3)] ]
