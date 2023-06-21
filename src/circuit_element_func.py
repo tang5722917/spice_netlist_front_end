@@ -2,7 +2,7 @@
 Author: Donald duck tang5722917@163.com
 Date: 2022-09-14 10:40:41
 LastEditors: Donald duck tang5722917@163.com
-LastEditTime: 2022-09-16 11:24:55
+LastEditTime: 2023-06-21 15:28:18
 FilePath: \spice_netlist_front_end\src\circuit_element_func.py
 Description:
 
@@ -10,7 +10,7 @@ Copyright (c) 2022 by Donald duck tang5722917@163.com, All Rights Reserved.
 '''
 from Circuit_element import Element_R
 from Circuit_element import Element_V
-
+from Circuit_element import Element_I
 from Circuit_control import Control_op
 from Circuit_control import Control
 
@@ -21,6 +21,10 @@ def netlist_element_deal(net_line):
     if Control.Control.Control_statue == 0:
         if elem[0][0] == 'v' or  elem[0][0] == 'V':       #DC source
             obj = Element_V.Element_V(elem[0])
+            obj.import_elem(elem[1],elem[2],elem[3:])
+            return [obj,0]
+        elif elem[0][0] == 'i' or  elem[0][0] == 'I':       #AC source
+            obj = Element_I.Element_I(elem[0])
             obj.import_elem(elem[1],elem[2],elem[3:])
             return [obj,0]
         elif elem[0][0] == 'r' or  elem[0][0] == 'R':       #Resistor

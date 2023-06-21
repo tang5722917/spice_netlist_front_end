@@ -1,9 +1,9 @@
 '''
 Author: Donald Duck tang5722917@163.com
 Date: 2022-09-13 01:05:58
-LastEditors: Donald Duck tang5722917@163.com
-LastEditTime: 2022-09-16 02:40:08
-FilePath: /spice_netlist_front_end/test/Test_set.py
+LastEditors: Donald duck tang5722917@163.com
+LastEditTime: 2023-06-21 15:17:41
+FilePath: \spice_netlist_front_end\test\Test_set.py
 Description:Test set class
 Copyright (c) 2022 by Donald Duck email: tang5722917@163.com, All Rights Reserved.
 '''
@@ -57,6 +57,7 @@ class Test_set:
         if len(self.circuit_list) != 0:
             for cir in self.circuit_list:
                 cir.run_test()
+                
     def run_circuit(self,num):
         logging.info("Test set info :" + self.print_test_set_info())
         self.circuit_list[num].run_test()

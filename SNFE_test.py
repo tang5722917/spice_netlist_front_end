@@ -1,9 +1,9 @@
 '''
 Author: Donald Duck tang5722917@163.com
 Date: 2022-09-12 23:35:08
-LastEditors: Donald Duck tang5722917@163.com
-LastEditTime: 2022-09-16 03:04:46
-FilePath: /spice_netlist_front_end/SNFE_test.py
+LastEditors: Donald duck tang5722917@163.com
+LastEditTime: 2023-06-21 15:15:42
+FilePath: \spice_netlist_front_end\SNFE_test.py
 Description: SNFE auto test script
 Copyright (c) 2022 by Donald Duck email: tang5722917@163.com, All Rights Reserved.
 '''
@@ -22,6 +22,8 @@ import argparse
 import Test_set
 import Test_help
 import Test_option_para
+import test_fun
+
 
 option_para = Test_option_para.Test_option_para()
 config = configparser.ConfigParser()
@@ -47,13 +49,19 @@ optparser.add_argument("Test_Set",nargs='?', type=int,help="Test set number (0 -
 optparser.add_argument("-v", "--version", help="show the version info for the test tool",
                     action="store_true")
 optparser.add_argument("--logpath", help="--logpath=<file path/name> :Modify the log path/name. (eg:--logpath='./test/log.txt')",
-                        default='autotest_log.txt')
+                        default='./autotest_log.txt')
 optparser.add_argument("-a","--all" ,help="Run all test circuit incuded by test.cfg " ,
                         action="store_true")
 optparser.add_argument("-o","--octsolver" ,help="Import netlist and do simulation using SPICE_OctSolver" ,
                         action="store_true")
-sets_list = list()
-
+sets_list = list()  #测试集列表
+for i in range(0,int(Number_test_sets)):
+    PATH_test_set = config['Test_set_'+str(i)]['PATH_test_set_'+str(i)]
+    Name_test_set = config['Test_set_'+str(i)]['Name_test_set_'+str(i)]
+    Info_test_set = config['Test_set_'+str(i)]['Info_test_set_'+str(i)]
+    testset = Test_set.Test_set(PATH_test_set,Name_test_set,Info_test_set,option_para)
+    sets_list.append(testset)
+    
 logging.info('Test circuit setting : ')
 logging.info('                      0 : default, only import netlist and export the octave .m file ')
 logging.info('                      1 : Import netlist and do simulation using SPICE_OctSolver \n')
@@ -69,14 +77,7 @@ elif args.octsolver:
     option_para.set_SNFE_output_action(1)  # -o / -octsolver
 elif args.all:  # 运行全部test circuit
     option_para.set_Run_all_test(1)
-
-
-for i in range(0,int(Number_test_sets)):
-    PATH_test_set = config['Test_set_'+str(i)]['PATH_test_set_'+str(i)]
-    Name_test_set = config['Test_set_'+str(i)]['Name_test_set_'+str(i)]
-    Info_test_set = config['Test_set_'+str(i)]['Info_test_set_'+str(i)]
-    testset = Test_set.Test_set(PATH_test_set,Name_test_set,Info_test_set,option_para)
-    sets_list.append(testset)
+    test_fun.run_all_test(sets_list,args)
 
 
 
@@ -95,13 +96,3 @@ end_time = time.time()
 print ("SNFE auot test run time : "+ "{:.5f}".format(end_time-start_time) + 's')
 logging.info("SNFE auot test run time : "+ "{:.5f}".format(end_time-start_time) + 's')
 print("Finish test!")
-
-def run_all_test():
-    print("Start all test!")
-    for set in sets_list:
-        cfg_name = set.cfg_is_exit()
-        set.cfg_import(cfg_name)
-        set.run_all_circuit()
-        print('Log path :' + args.logpath)
-        print("Finish all test successfully!")
-        os._exit(1)
