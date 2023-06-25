@@ -1,6 +1,6 @@
 #temp file for circuit sim
 *.temp
-*.txt
+test/*.txt
 *.data
 *.raw
 
