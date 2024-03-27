@@ -14,7 +14,7 @@ R1 0 1 10kohm
 
 .OP
 
-.control
-    set filetype = ascii
-.endc
+*.control
+*    set filetype = ascii
+*.endc
 .end

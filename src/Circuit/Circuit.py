@@ -2,7 +2,7 @@
 Author: Donald duck tang5722917@163.com
 Date: 2022-09-14 09:47:16
 LastEditors: Donald duck tang5722917@163.com
-LastEditTime: 2022-09-16 17:54:54
+LastEditTime: 2024-03-27 20:16:21
 FilePath: \spice_netlist_front_end\src\Circuit\Circuit.py
 Description: Circuit base class
             Building the Circuit obj
@@ -10,7 +10,7 @@ Copyright (c) 2022 by Donald duck tang5722917@163.com, All Rights Reserved.
 '''
 import os
 import copy
-import circuit_element_func as cef
+import Circuit.circuit_element_fac as cef
 
 from Circuit_element import Circuit_node
 from Circuit_control import Control
@@ -38,6 +38,7 @@ class Circuit :
 
     def import_circuit_elem(self,netlist):
         net_line_num = 0
+        obj_factory = cef.Circuit_element_fac()
     #statue_net    0/1
     #0 : default , circuit netlist deck
     #1 : Control statue, between '.control' and '.endc'
@@ -45,17 +46,16 @@ class Circuit :
             net_line_num += 1
             if (len(net_line.strip()) == 0):
                 continue
-            if net_line.strip()[0] == '*':
-                continue
-            obj = cef.netlist_element_deal(net_line)
-            if obj[1] == 0:
+            obj = obj_factory.netlist_element_deal(net_line,net_line_num)
+            if obj[1] == 0:    #元件对象
                 self.elem_obj_list.append(obj[0])
-            elif obj[1] == 1:
-                self.control_obj_list.append(obj[0])
-            elif obj[1] == 2:
+            elif obj[1] == 1: #控制对象
+                if (obj[0]) :
+                    self.control_obj_list.append(obj[0])
+            elif obj[1] == 2:  #模型对象
                 self.model_obj_list.append(obj[0])
             elif obj[1] == -1:
-                break
+                continue
             else:
                 self.logging.info("Import netlist error: \nCircuit:"+str(self.Circuit_num)+"\nError Line number :" + str(net_line_num) )
                 print("Import netlist error: \nCircuit:"+str(self.Circuit_num)+"\nError Line number :" + str(net_line_num) )
@@ -66,7 +66,7 @@ class Circuit :
                     self.logging.info("Error reason : Maybe miss \".end\" ")
                     print("Error reason : Maybe miss \".end\" ")
                 os._exit(1)
-        if (Control.Control.Control_statue == -1):
+        if (1):
             self.logging.info("Successfully import netlist :"+str(self.Circuit_num) )
         else :
             self.logging.info("Import netlist error:"+str(self.Circuit_num) )

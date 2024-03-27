@@ -1,9 +1,9 @@
 '''
 Author: Donald duck tang5722917@163.com
 Date: 2022-09-14 11:47:08
-LastEditors: Donald Duck tang5722917@163.com
-LastEditTime: 2022-09-17 11:49:15
-FilePath: /spice_netlist_front_end/src/Circuit_element/Element_2port.py
+LastEditors: Donald duck tang5722917@163.com
+LastEditTime: 2024-03-26 20:23:18
+FilePath: \spice_netlist_front_end\src\Circuit_element\Element_2port.py
 Description: Two port element base class
 
 Copyright (c) 2022 by Donald duck tang5722917@163.com, All Rights Reserved.
@@ -11,10 +11,10 @@ Copyright (c) 2022 by Donald duck tang5722917@163.com, All Rights Reserved.
 from Circuit_element import Element
 
 class Element_2port(Element.Element):
-    def import_elem(self,node_name1,node_name2,model_name):
-        self.node_name_list.append(node_name1)
-        self.node_name_list.append(node_name2)
-        self.model_name = model_name
+    def import_elem(self,line_ob):
+        self.node_name_list.append(line_ob.toks[1].value)
+        self.node_name_list.append(line_ob.toks[2].value)
+        self.model_name = line_ob.toks[3].value
 
     def return_pos_node(self):
         return self.node_obj_list[0]
